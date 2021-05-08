@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: todo
-#    command: flask run --host=0.0.0.0
     #command: gunicorn -w 4 --bind 0.0.0.0:5000 run:app
     command: gunicorn --bind 0.0.0.0:5000 run:app
     env_file:
@@ -27,6 +26,6 @@ services:
     container_name: mongodb
     ports:
     - "27018:27017"
-    volumes:
-      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#    volumes:
+#      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 

@@ -1,9 +1,8 @@
 import json
 
-from bson import ObjectId
-from flask import jsonify, request, Response, abort
-from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, JWTManager, get_jti
-from datetime import timedelta, datetime
+from flask import jsonify
+from flask_jwt_extended import create_access_token, create_refresh_token, get_jti
+from datetime import datetime
 
 from werkzeug.security import check_password_hash
 
