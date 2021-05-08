@@ -9,8 +9,8 @@ def create_app(config_object='todo_list_api.settings'):
 
     app.config.from_object(config_object)
 
-    redis.__init__(host='localhost', decode_responses=True)
     mongo.init_app(app)
+    redis.__init__(host='localhost', decode_responses=True)
     jwt.init_app(app)
 
     CORS(app, resources={r"/api/*": {"origins": "*"}})
