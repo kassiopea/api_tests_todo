@@ -1,14 +1,15 @@
 from datetime import datetime
 from os import environ
 
-from flask import request, jsonify
-from flask_jwt_extended import get_raw_jwt
+from bson import json_util
+from flask import request, jsonify, Response, abort
+from flask_jwt_extended import get_jwt_identity, get_raw_jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from todo_list_api.auth.helper import get_token, authenticate, token_revoke, make_list_valid_errors, make_list_errors, \
     make_response_message
 from todo_list_api.auth.validates import CreateRegistrationSchema, validate_new_password
-from todo_list_api.extentions import mongo
+from todo_list_api.extentions import mongo, redis
 from bson.objectid import ObjectId
 
 from todo_list_api.settings import ACCESS_EXPIRES, REFRESH_EXPIRES

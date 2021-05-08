@@ -1,12 +1,14 @@
+import json
 from datetime import datetime
 
+from bson import json_util
 from bson.objectid import ObjectId
-from flask import jsonify
+from flask import jsonify, Response
 from todo_list_api.extentions import mongo
 from todo_list_api.models.todo import Todo
-from todo_list_api.todo.helper import parse_projects, make_response, parse_todo_json
+from todo_list_api.todo.helper import parse_todo_list, parse_projects, make_response, parse_todo_json
 from todo_list_api.todo.messages import ErrorMessages
-from todo_list_api.todo.validates import validate_project, validate_todo
+from todo_list_api.todo.validates import validate_project, validate_todo, validate_date
 
 
 def get_ObjectId_list(list_items):
@@ -178,10 +180,10 @@ def update_todo(user_id, todo_id, request):
             return make_response(status_code=400, data_errors=errors)
         else:
 
-            # if todo_date:
-            #     format_el = '%Y-%m-%dT%H:%M:%S.%fZ'
-            #     date_utc = datetime.strptime(todo_date, format_el)
-            #     todo_date = date_utc
+    # if todo_date:
+    #     format_el = '%Y-%m-%dT%H:%M:%S.%fZ'
+    #     date_utc = datetime.strptime(todo_date, format_el)
+    #     todo_date = date_utc
 
             edited_todo = todo_collection.update({'_id': ObjectId(todo_id), 'author_id': ObjectId(user_id)},
                                                  {'$set': {'description': todo_description}})
