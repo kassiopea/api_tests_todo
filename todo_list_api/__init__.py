@@ -9,7 +9,7 @@ def create_app(config_object='todo_list_api.settings'):
 
     app.config.from_object(config_object)
 
-    redis.__init__(host='redis', decode_responses=True)
+    redis.__init__(host='localhost', decode_responses=True)
     mongo.init_app(app)
     jwt.init_app(app)
 
