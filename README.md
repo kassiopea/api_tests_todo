@@ -7,3 +7,6 @@
 
 ### Запуск проекта 
 ```flask run --host=0.0.0.0```
+
+### Запуск скрипта для изменения данных в Mongodb
+`mongo < mongo/mongo-init.js`
