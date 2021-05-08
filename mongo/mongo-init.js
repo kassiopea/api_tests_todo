@@ -1,12 +1,5 @@
 db = db.getSiblingDB('DevTodoDB');
-
-//db.createUser(
-//  {
-//    user: 'test_admin',
-//    pwd: '123456',
-//    roles: [{ role: 'readWrite', db: 'DevTodoDB' }],
-//  },
-//);
+db.dropDatabase();
 
 db.createCollection('colors');
 
