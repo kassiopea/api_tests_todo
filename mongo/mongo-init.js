@@ -1,5 +1,13 @@
 db = db.getSiblingDB('DevTodoDB');
-db.dropDatabase();
+db.dropDatabase()
+db.createUser(
+  {
+    user: 'test_api_user',
+    email: 'test_api@test.ru'
+    pwd: '123456',
+    roles: [{ role: 'readWrite', db: 'DevTodoDB' }],
+  },
+);
 
 db.createCollection('colors');
 
