@@ -1,12 +1,12 @@
 import pytest
 import requests
 
-from tests.tests_api.constants import BaseUrls, AuthUrls, BaseHeaders, UsersUrls
-from tests.tests_api.data.random_user_credentials_for_valid_auth import test_data
-from tests.tests_api.data.errors import UserAuthErrors
-from tests.tests_api.data.messages import UserAuthMessages
-from tests.tests_api.models.user import User
-from tests.tests_api.data.generate_auth_data import generate_data, generate_invalid_data
+from tests import BaseUrls, AuthUrls, BaseHeaders, UsersUrls
+from tests import test_data
+from tests import UserAuthErrors
+from tests import UserAuthMessages
+from tests import User
+from tests import generate_data, generate_invalid_data
 
 
 # функция для очистки пользователя после тестов

@@ -1,11 +1,8 @@
-import pytest
 import requests
 
-from tests.tests_api.constants import BaseUrls, TodoUrls, BaseHeaders, AuthUrls
-from tests.tests_api.data.generate_auth_data import generate_data
-from tests.tests_api.models.user import User
-from tests.tests_api.models.project import Project
-from tests.tests_api.data.errors import TodoErrors
+from tests import BaseUrls, TodoUrls, BaseHeaders
+from tests import Project
+from tests import TodoErrors
 
 
 class TestCheckInvalidCreateProject:
