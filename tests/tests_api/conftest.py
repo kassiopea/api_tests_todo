@@ -1,6 +1,8 @@
 import importlib
 import os
 import json
+
+import allure
 import pytest
 import requests
 
@@ -28,14 +30,16 @@ class ApiTodo:
         return requests.delete(url=url, headers=headers)
 
 
+@allure.title('Передали базовый URL')
 @pytest.fixture
-def todo_list_api():
+def todo_list_api_base_url():
     base_url = BaseUrls.BASE_URL
     return ApiTodo(base_url=base_url)
 
 
+@allure.title('Авторизация пользователя')
 @pytest.fixture
-def auth_token(todo_list_api):
+def auth_token(todo_list_api_base_url, request):
     data_for_auth = User(username=generate_data("username", 8),
                          email=generate_data("email", 10),
                          password=generate_data("password", 6))
@@ -43,10 +47,22 @@ def auth_token(todo_list_api):
 
     auth_url = f'{AuthUrls.AUTH}{AuthUrls.REGISTER}'
     headers = BaseHeaders.HEADERS
-    response = todo_list_api.post(path=auth_url, headers=headers, data=data)
-    assert response.status_code == 200
+    response = todo_list_api_base_url.post(path=auth_url, headers=headers, data=data)
+    with allure.step(f'Создали нового пользователя с именем: {data_for_auth.username}, почтой: {data_for_auth.email},'
+                     f'паролем: {data_for_auth.password}'):
+        assert response.status_code == 200
     response_body = response.json()
     auth_token = 'Bearer ' + response_body['access_token']
+
+    def delete_user():
+        url = f'{AuthUrls.AUTH}{AuthUrls.DELETE}'
+        headers_for_delete_user = {'Authorization': auth_token}
+        response_for_delete_user = todo_list_api_base_url.delete(path=url, headers=headers_for_delete_user)
+        with allure.step(f'Запрос отправлен. Проверяем, что пользователь {data_for_auth.username} удалён'):
+            assert response_for_delete_user.status_code == 200, \
+                f'Пользователь не был удалён. Status code is {response.status_code}'
+
+    request.addfinalizer(delete_user)
     return auth_token
 
 
