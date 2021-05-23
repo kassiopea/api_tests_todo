@@ -19,4 +19,3 @@ requests~=2.25.1
 pytest_schema==0.1.0
 allure-pytest==2.8.40
 allure-python-commons==2.8.40
-pytest-allure-adaptor2==1.8.2
