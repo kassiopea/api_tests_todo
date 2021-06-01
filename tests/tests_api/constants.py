@@ -20,12 +20,13 @@ class BaseHeaders:
 class TodoUrls:
     TODO_API = '/api/v1/todo_list/'
     CREATE_PROJECT = 'projects'
-    CREATE_TODO = 'todo'
+    TODO = 'todo'
 
 
 class UsersUrls:
-    USERS_API = "/api/v1/users"
-    ABOUT_CURRENT_USER = "/profile"
+    USERS_API = "/api/v1/users/"
+    ABOUT_CURRENT_USER = "profile"
+
 
 class Colors:
     COLORS_API = ""
