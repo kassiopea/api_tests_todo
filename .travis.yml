@@ -17,7 +17,7 @@ before_script:
 script:
   - sh -c "ls tests/tests_api/"
 #  - docker-compose up -d
-  - docker-compose exec todo_list_api sh -c "pytest -vs tests/tests_api/test_todo.py"
+#  - docker-compose exec todo_list_api sh -c "pytest -vs tests/tests_api/test_todo.py"
   - sh -c "pytest -vs tests/tests_api/test_todo.py"
 after_script:
   - docker-compose down
