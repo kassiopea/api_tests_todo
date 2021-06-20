@@ -4,6 +4,7 @@ python:
 services:
   - docker
 before_script:
+  - pip install urllib3
   - pip install docker-compose
 #  - docker-compose build
 
