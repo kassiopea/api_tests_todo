@@ -6,4 +6,4 @@ install:
   - "pip3 install -r requirements.txt"
 #before_script: flask run --host=0.0.0.0
 #script: pytest tests/tests_api/test_todo.py
-script: nosetests
+script: "pytest tests/tests_api/test_todo.py"
