@@ -3,10 +3,11 @@ python:
   - "3.7"
 services:
   - docker
-before_script: pip install docker-compose
-#  - docker-compose up --build -d
+before_script:
+  - pip install docker-compose
+#  - docker-compose build
 
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 #script: docker-compose up --build -d && pytest
 script:
-  - docker-compose run redis mongodb todo_list_api sh -c "pytest"
+  - docker-compose build && docker-compose run redis mongodb todo_list_api sh -c "pytest"
