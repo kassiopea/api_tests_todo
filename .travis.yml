@@ -3,7 +3,9 @@ python:
   - "3.7"
 services:
   - docker
-before_script: pip install docker-compose
+before_script:
+  - pip install docker-compose
+  - docker-compose build
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 script:
-  - docker-compose up --build sh -c "pytest tests/tests_api/test_todo.py"
+  - docker-compose up -d && "pytest tests/tests_api/test_todo.py"
