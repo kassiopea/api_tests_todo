@@ -16,5 +16,6 @@ before_script:
 #script: docker-compose up --build -d && pytest
 script:
   - sh -c "ls tests/tests_api/"
-  - docker-compose up -d && pytest
+  - docker-compose up -d
+  - pytest
   - docker-compose down
