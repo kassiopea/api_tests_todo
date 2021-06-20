@@ -15,6 +15,6 @@ before_script:
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 #script: docker-compose up --build -d && pytest
 script:
-  - sh -c "ls"
-  - docker-compose run --rm todo_list_api sh -c "pytest tests/tests_api/test_todo.py"
+  - sh -c "ls tests/tests_api/"
+  - docker-compose up -d && pytest
   - docker-compose down
