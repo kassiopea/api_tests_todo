@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.7"
+services:
+  - docker
+before_script: pip install docker-compose
+#script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
+script:
+  - docker-compose run todo_list_api redis mongodb sh -c "pytest tests/tests_api/test_todo.py"
