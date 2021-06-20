@@ -10,6 +10,7 @@ services:
 before_script:
   - pip install docker-compose
   - docker-compose up -d --build
+  - docker-compose ps -a
 
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 #script: docker-compose up --build -d && pytest
@@ -17,5 +18,6 @@ script:
   - sh -c "ls tests/tests_api/"
 #  - docker-compose up -d
   - docker-compose exec todo_list_api sh -c "pytest -vs tests/tests_api/test_todo.py"
+  - sh -c "pytest -vs tests/tests_api/test_todo.py"
 after_script:
   - docker-compose down
