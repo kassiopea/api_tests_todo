@@ -1,17 +1,20 @@
 language: python
+
 python:
   - "3.7"
+sudo: required
+
 services:
   - docker
+
 before_script:
-  - pip install urllib3
   - pip install docker-compose
-#  - docker-compose build
+  - docker-compose build
+#  - docker-compose up -d
 
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 #script: docker-compose up --build -d && pytest
 script:
-  - docker-compose build
-  - docker-compose up -d
-  - pytest
+  - sh -c "ls"
+  - docker-compose run --rm todo_list_api sh -c "pytest tests/tests_api/test_todo.py"
   - docker-compose down
