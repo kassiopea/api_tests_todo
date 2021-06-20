@@ -4,8 +4,9 @@ python:
 services:
   - docker
 before_script:
+  - sudo pip3 install urllib3
   - pip install docker-compose
-  - docker-compose up --build -d
+#  - docker-compose up --build -d
 
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
-script: pytest
+script: docker-compose up --build -d && pytest
