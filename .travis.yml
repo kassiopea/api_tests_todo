@@ -6,15 +6,15 @@ sudo: required
 
 services:
   - docker
-  - mongodb
-  - redis
+#  - mongodb
+#  - redis
 
 before_script:
   - pip install docker-compose
   - docker-compose up -d --build
   - docker-compose ps -a
-  - sleep 15
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+#  - sleep 15
+#  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 
 #script: "flask run --host=0.0.0.0 & pytest tests/tests_api/test_todo.py"
 #script: docker-compose up --build -d && pytest
