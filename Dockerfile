@@ -1,9 +1,9 @@
-#FROM python:3.8-slim
-FROM ubuntu:latest
-
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
-    python3.8 python3-pip python3.8-dev
+FROM python:3.8-slim
+#FROM ubuntu:latest
+#
+#RUN apt-get update && \
+#    apt-get install --no-install-recommends -y \
+#    python3.8 python3-pip python3.8-dev
 RUN mkdir -p var/www/app
 RUN cd var/www/app
 RUN groupadd -r tester && useradd -r -s /bin/false -g tester tester
