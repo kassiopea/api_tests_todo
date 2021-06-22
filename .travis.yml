@@ -1,13 +1,13 @@
 language: python
 
 python:
-  - "3.7"
+  - "3.9"
 sudo: required
 
 services:
   - docker
-#  - mongodb
-#  - redis
+  - mongodb
+  - redis
 
 before_script:
   - pip install docker-compose
@@ -20,6 +20,6 @@ before_script:
 #script: docker-compose up --build -d && pytest
 script:
   - sh -c "ls tests/tests_api/"
-  - sh -c "pytest -vs"
+  - sh -c "pytest -vs -n 4"
 after_script:
   - docker-compose down
