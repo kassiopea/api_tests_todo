@@ -1,4 +1,5 @@
 FROM python:3.8-slim
+<<<<<<< HEAD
 #FROM ubuntu:latest
 #
 #RUN apt-get update && \
@@ -13,4 +14,3 @@ RUN pip install -r requirements.txt
 #RUN chown -R tester:tester /var/www/app
 #USER tester
 COPY . .
-#CMD ["/var/www/app/entrypoint.sh"]

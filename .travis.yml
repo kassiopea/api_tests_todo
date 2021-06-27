@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "3.7"
+  - "3.9"
 sudo: required
 
 services:
@@ -20,8 +20,6 @@ before_script:
 #script: docker-compose up --build -d && pytest
 script:
   - sh -c "ls tests/tests_api/"
-#  - docker-compose up -d
-#  - docker-compose exec todo_list_api sh -c "pytest -vs tests/tests_api/test_todo.py"
-  - sh -c "pytest -vs tests/tests_api/test_todo.py"
+  - sh -c "pytest -vs -n 4"
 after_script:
   - docker-compose down
