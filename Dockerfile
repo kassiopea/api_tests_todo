@@ -1,5 +1,4 @@
 FROM python:3.8-slim
-<<<<<<< HEAD
 #FROM ubuntu:latest
 #
 #RUN apt-get update && \
