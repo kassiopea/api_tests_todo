@@ -16,7 +16,7 @@ install:
   - pip install pytest-flake8
 
 before_script:
-  - flask run --host=0.0.0.0
+#  - flask run --host=0.0.0.0
   - mongo < mongo/mongo-init.js
 
 script:
