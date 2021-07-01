@@ -21,4 +21,4 @@ before_script:
 
 script:
 #  - pytest --cache-clear --flake8
-  - pytest tests/tests_api/test_todo.py
+  - pytest -vs tests/tests_api/test_todo.py
