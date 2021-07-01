@@ -1,2 +1,0 @@
-FLASK_APP=todo_list_api
-FLASK_ENV=development

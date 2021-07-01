@@ -1,35 +1,38 @@
-# Здесь пока пусто
+# Проект для api тестов
 
-### Перед запуском
-Должны быть запущены базы данных:
+[![Build](https://img.shields.io/travis/com/kassiopea/api_tests_todo/main)](https://img.shields.io/travis/com/kassiopea/api_tests_todo/main)
+[![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)](https://www.python.org/downloads/release/python-380/)
+
+Проект был создан для резюме, чтобы показать пример api тестов
+
+## О проекте
+Тестовый проект написан с использованием:
+- python 3.8
+- flask
 - mongodb
 - redis
 
-### Запуск проекта 
-flask run --host=0.0.0.0`
+Приложение представляет собой rest api для создания todo.
 
-### Запуск скрипта для изменения данных в Mongodb
-`mongo < mongo/mongo-init.js`
+Реализована регистрация и авторизация с помощью токена.
 
-### Запуск тестов с выводом результатов в консоли
-`pytest -vs tests/tests_api/test_todo.py`
+## Структура
 
-### Запуск тестов с allure
-Для генерации тестов с allure локально, необходимо установить allure.
-Пример установки на linux:
-- скачиваем архив с актуальной версией с оф.сайта (в данном примере allure-commandline 2.14.0)
-- в консоли распаковываем архив в директорию
-`sudo tar -zxvf </path/to/folder/allure-commandline_2.14.0.tgz> -C /opt/`
-- создаем символьную ссылку на исполняемый файл
-`sudo ln -s /opt/allure-2.14.0/bin/allure /usr/bin/allure`
-- проверяем версию allure
-`allure --version`
+- mongo - папка для скриптов для БД
+    - mongo-init.js - скрипт для наполнения бд данными перед стартом тестов
+- tests - папка со всеми тестами
+    - data - папка для данных
+        - description_valid.py - файл, с данными для параметризации. 
+        Тестирование поля "Описание" (проверки граничных значений)
+        - errors.py - файл, который содержит все тексты ошибок
+        - generate_auth_data.py содержит функцию, генерирующую валидные и невалидные данные
+        - messages.py содержит все тексты сообщений
+        - 
+        
 
-Комманда запуска тестов с allure
+## Методы API
 
-`pytest tests/tests_api/test_todo.py --alluredir=tests/tests_api/allure_reports`
 
-Генерация html allure после прогона тестов
 
-`allure serve tests/tests_api/allure_reports`
+
 
