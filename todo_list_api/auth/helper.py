@@ -1,7 +1,11 @@
 import json
 
 from flask import jsonify
-from flask_jwt_extended import create_access_token, create_refresh_token, get_jti
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    get_jti
+)
 from datetime import datetime
 
 from werkzeug.security import check_password_hash
@@ -35,7 +39,10 @@ def get_token(user_id):
 
 def authenticate(login, password):
     users_collection = mongo.db.users
-    user = users_collection.find_one({"$or": [{"username": login}, {"email": login}]})
+    user = users_collection.find_one(
+        {"$or": [{"username": login},
+                 {"email": login}]}
+    )
 
     if user and check_password_hash(user.get("password"), password):
         _id = str(user['_id'])
@@ -95,7 +102,10 @@ def make_list_errors(status_code: int, data: str or dict = None) -> json:
     return response
 
 
-def make_response_message(status_code: int, data: str or dict = None, error: dict = None) -> json:
+def make_response_message(status_code: int,
+                          data: str or dict = None,
+                          error: dict = None
+                          ) -> json:
     response = jsonify({
         'status': status_code,
         'data': data,

@@ -42,9 +42,14 @@ def add_marks(current_id, request):
     elif not description:
         result.append({'error': 'укажите описание марки'})
     else:
-        mark = {'mark_id': ObjectId(), 'color_id': color_id, 'description': description}
+        mark = {
+            'mark_id': ObjectId(),
+            'color_id': color_id,
+            'description': description
+        }
         mark_res = users_collection.update(
-            {'_id': ObjectId(current_id), 'profile.marks.description': {'$ne': description}},
+            {'_id': ObjectId(current_id),
+             'profile.marks.description': {'$ne': description}},
             {'$push': {'profile.marks': mark}})
         result.append(mark_res)
 
@@ -57,9 +62,11 @@ def update_marks(current_id, request, mark_id):
     description = request['description']
     color_id = request['color_id']
     errors = None
-    mark_result = users_collection.update({'_id': ObjectId(current_id), 'profile.marks.mark_id': ObjectId(mark_id)},
-                                          {'$set': {'profile.marks.$.description': description,
-                                                    'profile.marks.$.color_id': color_id}})
+    mark_result = users_collection.update(
+        {'_id': ObjectId(current_id),
+         'profile.marks.mark_id': ObjectId(mark_id)},
+        {'$set': {'profile.marks.$.description': description,
+                  'profile.marks.$.color_id': color_id}})
     if not mark_result:
         errors = [{'message': 'такого объекта не существует'}]
 
@@ -70,11 +77,13 @@ def update_marks(current_id, request, mark_id):
 def get_marks(current_id):
     users_collection = mongo.db.users
 
-    marks_list = users_collection.find({'_id': ObjectId(current_id)}, {'profile.marks': 1, '_id': 0})
+    marks_list = users_collection.find({'_id': ObjectId(current_id)},
+                                       {'profile.marks': 1, '_id': 0})
     result = {'marks': []}
 
     for mark in marks_list[0]['profile']['marks']:
-        result['marks'].append({'mark_id': str(mark['mark_id']), 'description': mark['description'],
+        result['marks'].append({'mark_id': str(mark['mark_id']),
+                                'description': mark['description'],
                                 'color_id': mark['color_id']})
 
     response = jsonify(data=result)
@@ -83,6 +92,11 @@ def get_marks(current_id):
 
 def delete_mark(current_id, mark_id):
     users_collection = mongo.db.users
-    del_mark = users_collection.update({'_id': ObjectId(current_id)},
-                                          {'$pull': {'profile.marks': {'mark_id': ObjectId(mark_id)}}})
+    del_mark = users_collection.update(
+        {'_id': ObjectId(current_id)},
+        {'$pull':
+            {
+                'profile.marks':
+                    {'mark_id': ObjectId(mark_id)}
+            }})
     return del_mark

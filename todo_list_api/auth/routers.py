@@ -4,7 +4,12 @@ from flask_jwt_extended import (
 )
 
 from todo_list_api.auth import auth_user
-from todo_list_api.auth.auth_user import logout, logout2, change_pwd, delete_user_account
+from todo_list_api.auth.auth_user import (
+    logout,
+    logout2,
+    change_pwd,
+    delete_user_account
+)
 from todo_list_api.auth.helper import refresh
 
 auth = Blueprint('auth', __name__)

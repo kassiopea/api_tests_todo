@@ -12,18 +12,24 @@ class CreateRegistrationSchema(Schema):
     @validates('username')
     def is_between_2_120_symbols_in_username(self, value):
         if len(value) < 2 or len(value) > 120:
-            raise ValidationError("Длинна имени должна быть от 2 до 120 символов")
+            raise ValidationError(
+                "Длинна имени должна быть от 2 до 120 символов"
+            )
 
     @validates('username')
     def is_match_username_with_pattern(self, value):
         pattern_username = r'^[0-9a-zA-Z]+[0-9a-zA-Z-_.]+$'
         if not re.match(pattern_username, value):
-            raise ValidationError("Имя пользователя содержит недопустимые символы")
+            raise ValidationError(
+                "Имя пользователя содержит недопустимые символы"
+            )
 
     @validates('password')
     def is_between_6_20_symbols_in_password(self, value):
         if len(value) < 6 or len(value) > 20:
-            raise ValidationError("Длинна пароля может содержать от 6 до 20 символов")
+            raise ValidationError(
+                "Длинна пароля может содержать от 6 до 20 символов"
+            )
 
     @validates('password')
     def is_match_password_with_pattern(self, value):

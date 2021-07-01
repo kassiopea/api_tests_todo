@@ -1,7 +1,14 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from todo_list_api.users.users import get_current_user, add_marks, update_marks, get_marks, delete_mark, get_all_users
+from todo_list_api.users.users import (
+    get_current_user,
+    add_marks,
+    update_marks,
+    get_marks,
+    delete_mark,
+    get_all_users
+)
 
 users = Blueprint('users', __name__)
 

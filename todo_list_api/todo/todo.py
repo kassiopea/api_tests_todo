@@ -4,7 +4,11 @@ from bson.objectid import ObjectId
 from flask import jsonify
 from todo_list_api.extentions import mongo
 from todo_list_api.models.todo import Todo
-from todo_list_api.todo.helper import parse_projects, make_response, parse_todo_json
+from todo_list_api.todo.helper import (
+    parse_projects,
+    make_response,
+    parse_todo_json
+)
 from todo_list_api.todo.messages import ErrorMessages
 from todo_list_api.todo.validates import validate_project, validate_todo
 
@@ -31,15 +35,19 @@ def add_project(user_id, request):
         if errors:
             return make_response(status_code=400, data_errors=errors)
 
-        existing_project = projects_collection.find_one({'project_name': project_name,
-                                                         'author_id': ObjectId(user_id)})
+        existing_project = projects_collection.find_one(
+            {'project_name': project_name,
+             'author_id': ObjectId(user_id)})
+
         if existing_project:
             errors = [{'error': ErrorMessages.ENTRY_ALREADY_EXIST}]
             response = make_response(status_code=400, data_errors=errors)
             return response
         else:
             project = projects_collection.insert(
-                {'project_name': str(raw_project_name), 'author_id': ObjectId(user_id)})
+                {'project_name': str(raw_project_name),
+                 'author_id': ObjectId(user_id)}
+            )
             data = {'project_id': str(project)}
             response = make_response(status_code=200, data=data)
             return response
@@ -49,7 +57,11 @@ def add_project(user_id, request):
 def get_projects(user_id):
     todo_collection = mongo.db.projects
     data = []
-    projects = todo_collection.find({'author_id': ObjectId(user_id)}, {'_id': 1, 'project_name': 1})
+    projects = todo_collection.find(
+        {'author_id': ObjectId(user_id)},
+        {'_id': 1, 'project_name': 1}
+    )
+
     result = parse_projects(projects)
     if result:
         data = result
@@ -64,8 +76,11 @@ def update_project(user_id, project_id, request):
     errors = None
     if not project_name:
         errors = [{'message': 'укажите имя проекта'}]
-    project_update = project_collection.update({'author_id': ObjectId(user_id), '_id': ObjectId(project_id)},
-                                               {'$set': {'project_name': project_name}})
+    project_update = project_collection.update(
+        {'author_id': ObjectId(user_id),
+         '_id': ObjectId(project_id)},
+        {'$set': {'project_name': project_name}}
+    )
 
     response = jsonify(errors=errors, data=project_update)
     return response
@@ -74,8 +89,15 @@ def update_project(user_id, project_id, request):
 # возможно, нужен рефакторинг
 def delete_project(user_id, project_id):
     project_collection = mongo.db.projects
-    project_del = project_collection.delete_one({'_id': ObjectId(project_id), 'author_id': ObjectId(user_id)})
-    result = [{'acknowledged': project_del.acknowledged, 'deletedCount': project_del.deleted_count}]
+
+    project_del = project_collection.delete_one(
+        {'_id': ObjectId(project_id),
+         'author_id': ObjectId(user_id)})
+
+    result = [{
+        'acknowledged': project_del.acknowledged,
+        'deletedCount': project_del.deleted_count
+    }]
     response = jsonify(data=result)
     return response
 
@@ -107,10 +129,14 @@ def add_todo(user_id, request):
         if errors:
             return make_response(status_code=400, data_errors=errors)
 
-        existing_todo = todo_collection.find_one({'description': description,
-                                                  'author_id': ObjectId(user_id)})
+        existing_todo = todo_collection.find_one(
+            {'description': description,
+             'author_id': ObjectId(user_id)})
+
         if existing_todo:
-            errors.append({'description_error': 'Такое название задачи уже существует'})
+            errors.append(
+                {'description_error': 'Такое название задачи уже существует'}
+            )
             response = make_response(status_code=400, data_errors=errors)
             return response
 
@@ -123,9 +149,13 @@ def add_todo(user_id, request):
                 format_el = '%Y-%m-%dT%H:%M:%S.%fZ'
                 date_utc = datetime.strptime(date, format_el)
 
-            todo = todo_collection.insert({'author_id': ObjectId(author_id),
-                                           'description': description,
-                                           'date': date_utc, 'project_id': project_id, 'list_id_marks': list_id_marks})
+            todo = todo_collection.insert(
+                {'author_id': ObjectId(author_id),
+                 'description': description,
+                 'date': date_utc,
+                 'project_id': project_id,
+                 'list_id_marks': list_id_marks})
+
             data = {'todo_id': str(todo)}
             response = make_response(status_code=200, data=data)
             return response
@@ -183,8 +213,10 @@ def update_todo(user_id, todo_id, request):
             #     date_utc = datetime.strptime(todo_date, format_el)
             #     todo_date = date_utc
 
-            edited_todo = todo_collection.update({'_id': ObjectId(todo_id), 'author_id': ObjectId(user_id)},
-                                                 {'$set': {'description': todo_description}})
+            edited_todo = todo_collection.update(
+                {'_id': ObjectId(todo_id),
+                 'author_id': ObjectId(user_id)},
+                {'$set': {'description': todo_description}})
 
             # response = jsonify(errors=errors, data=edited_todo)
             response = make_response(status_code=200, data=edited_todo)
@@ -199,8 +231,10 @@ def update_todo(user_id, todo_id, request):
 def delete_todo(user_id, todo_id):
     todo_collection = mongo.db.projects
 
-    del_todo = todo_collection.update({'_id': ObjectId(todo_id), 'author_id': ObjectId(user_id)},
-                                      {'$pull': {'todo_list_api': {'todo_id': ObjectId(todo_id)}}})
+    del_todo = todo_collection.update(
+        {'_id': ObjectId(todo_id),
+         'author_id': ObjectId(user_id)},
+        {'$pull': {'todo_list_api': {'todo_id': ObjectId(todo_id)}}})
 
     return del_todo
 
@@ -208,8 +242,11 @@ def delete_todo(user_id, todo_id):
 def del_todo_date(user_id, project_id, todo_id):
     todo_collection = mongo.db.projects
 
-    del_date = todo_collection.update({'_id': ObjectId(project_id), 'author_id': ObjectId(user_id),
-                                       'todo_list_api.todo_id': ObjectId(todo_id)},
-                                      {'$unset': {'todo_list_api.$.date': ""}})
+    del_date = todo_collection.update(
+        {'_id': ObjectId(project_id),
+         'author_id': ObjectId(user_id),
+         'todo_list_api.todo_id': ObjectId(todo_id)
+         },
+        {'$unset': {'todo_list_api.$.date': ""}})
 
     return del_date
