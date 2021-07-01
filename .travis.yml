@@ -3,21 +3,8 @@ language: python
 python:
   - "3.8"
 
-services:
-  - mongodb
-  - redis
-
-before_install:
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-
 install:
   - pip install -r requirements.txt
-#  - pip install pytest-flake8
-
-before_script:
-#  - flask run --host=0.0.0.0
-  - mongo < mongo/mongo-init.js
 
 script:
-#  - pytest --cache-clear --flake8
-  - pytest -vs tests/tests_api/test_todo.py
+  - pytest --cache-clear --flake8
