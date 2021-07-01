@@ -1,6 +1,6 @@
 # Ветка dev_local
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![Build Status](https://travis-ci.com/kassiopea/api_tests_todo.svg?branch=dev_docker_tests)](https://travis-ci.com/kassiopea/api_tests_todo)
+[![Build Status](https://travis-ci.com/kassiopea/api_tests_todo.svg?branch=dev_local)](https://travis-ci.com/kassiopea/api_tests_todo)
 
 <img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white"/> <img alt="Flask" src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"/> <img alt="TravisCI" src="https://img.shields.io/badge/travisci-%232B2F33.svg?style=for-the-badge&logo=travis&logoColor=white"/> 
 
