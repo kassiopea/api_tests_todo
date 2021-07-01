@@ -1,6 +1,4 @@
 import json
-from datetime import datetime
-from unittest import result
 
 from flask import jsonify
 
@@ -23,7 +21,8 @@ def parse_todo_list(response):
         todo_in_project = item['todo_list_api']
 
         for todo_i in todo_in_project:
-            todo = {'_id': str(todo_i['_id']), 'description': todo_i['description']}
+            todo = {'_id': str(todo_i['_id']),
+                    'description': todo_i['description']}
 
             if 'marks' in todo_i:
                 todo['marks'] = todo_i['marks']
@@ -44,7 +43,8 @@ def parse_todo_list(response):
 def parse_projects(projects):
     result_projects = []
     for item in projects:
-        project = {'_id': str(item['_id']), 'project_name': item['project_name']}
+        project = {'_id': str(item['_id']),
+                   'project_name': item['project_name']}
         result_projects.append(project)
 
     return result_projects
@@ -52,12 +52,18 @@ def parse_projects(projects):
 
 def create_project(user_id, project_name):
     projects = mongo.db.projects
-    project = projects.insert({'project_name': project_name, 'author_id': user_id})
+    project = projects.insert(
+        {'project_name': project_name,
+         'author_id': user_id
+         })
 
     return {'project_id': str(project)}
 
 
-def make_response(status_code: int, data_errors: list = None, data: dict = None) -> json:
+def make_response(status_code: int,
+                  data_errors: list = None,
+                  data: dict = None
+                  ) -> json:
     response = jsonify({
         'status': status_code,
         'errors': data_errors,
@@ -75,7 +81,14 @@ def parse_todo_json(response):
         project_id = None if i_project_id == "None" else i_project_id
         i_date = str(i['date'])
         date = None if i_date == "None" else i_date
-        i_list_marks = None if i['list_id_marks'] == "None" else i['list_id_marks']
+        # E501 line too long
+        # i_list_marks = None
+        # if i['list_id_marks'] == "None"
+        # else i['list_id_marks']
+        if i['list_id_marks'] == "None":
+            i_list_marks = None
+        else:
+            i_list_marks = i['list_id_marks']
 
         item = {
             '_id': str(i['_id']),

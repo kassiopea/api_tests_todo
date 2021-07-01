@@ -1,7 +1,12 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from todo_list_api.colors.colors import get_marks_colors, add_colors, update_color, delete_color
+from todo_list_api.colors.colors import (
+    get_marks_colors,
+    add_colors,
+    update_color,
+    delete_color
+)
 
 colors = Blueprint('colors', __name__)
 

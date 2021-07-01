@@ -1,8 +1,17 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from todo_list_api.todo.todo import add_todo, get_todo_list, add_project, get_projects, update_project, delete_project, \
-    update_todo, delete_todo, del_todo_date
+from todo_list_api.todo.todo import (
+    add_todo,
+    get_todo_list,
+    add_project,
+    get_projects,
+    update_project,
+    delete_project,
+    update_todo,
+    delete_todo,
+    del_todo_date
+)
 
 todo = Blueprint('todo', __name__)
 
@@ -65,4 +74,3 @@ def delete_todo_date(project_id, todo_id):
     if request.method == 'DELETE':
         user_id = get_jwt_identity()
         return del_todo_date(user_id, project_id, todo_id)
-
