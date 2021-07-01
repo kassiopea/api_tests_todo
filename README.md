@@ -1,7 +1,13 @@
 # Ветка dev_docker_tests
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Build Status](https://travis-ci.com/kassiopea/api_tests_todo.svg?branch=dev_docker_tests)](https://travis-ci.com/kassiopea/api_tests_todo)
 
-В этой ветке можно запустить проект с помощью докер контейнера вместе с базами данных
+<img alt="Python" src="https://img.shields.io/badge/python-%2314354C.svg?style=for-the-badge&logo=python&logoColor=white"/>
+<img alt="Flask" src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white"/>
+<img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"/>
+<img alt="TravisCI" src="https://img.shields.io/badge/travisci-%232B2F33.svg?style=for-the-badge&logo=travis&logoColor=white"/>
+<img alt="Docker" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"/>
+
 
 ## Перед запуском
 Все приведенные команды на примере linux
@@ -24,23 +30,6 @@
 ### Запуск тестов внутри контейнера
 - Собрать и запустить проект
 `sudo docker-compose exec -T todo_list_api pytest -vs`
-
-### Запуск тестов вне докер образа
-
-Перед запуском необходимо:
-- установить virtualenv: `python -m venv venv`
-- активировать переменное окружение `source venv/bin/activate`
-- установить python (>=3.6)
-- установить pytest: `pip install pytest`
-
-Запуск тестов без allure:
- - `pytest -vs`
-
-Запуск тестов с allure:
-
- - установить зависимости allure: `pip install allure-pytest`
- - запустить тесты с генерацией отчетов `pytest --alluredir=%allure_result_folder%`
- - сгенерировать отчет allure `allure serve %allure_result_folder%`
 
 ### Остановка докера после прогона тестов
 Удалить докер контейнеры: `sudo docker-compose down`
