@@ -13,12 +13,12 @@ before_install:
 
 install:
   - pip install -r requirements.txt
-  - pip install pytest-flake8
+#  - pip install pytest-flake8
 
 before_script:
 #  - flask run --host=0.0.0.0
   - mongo < mongo/mongo-init.js
 
 script:
-  - pytest --cache-clear --flake8
+#  - pytest --cache-clear --flake8
   - pytest tests/tests_api/test_todo.py
