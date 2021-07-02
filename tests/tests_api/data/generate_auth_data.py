@@ -11,15 +11,18 @@ def generate_data(field: str, length: int) -> str:
         first_symbol = string.ascii_letters + string.digits
         random_first_symbol = ''.join(random.choices(first_symbol, k=1))
         username_string = string.ascii_letters + string.digits + '-_.' * 4
-        random_username_string = ''.join(random.choices(username_string, k=(length - 1)))
+        random_username_string = ''.join(random.choices
+                                         (username_string, k=(length - 1)))
         result_username = random_first_symbol + random_username_string
         return result_username
     elif field == "password":
-        passport_string = string.ascii_letters + string.digits + '-_:;!?()&#' * 4
+        passport_string = string.ascii_letters + string.digits +\
+                          '-_:;!?()&#' * 4
         return ''.join(random.choices(passport_string, k=length))
     elif field == "email":
         first_part_email = string.ascii_letters + string.digits + '_-' * 4
-        random_email_string = ''.join(random.choices(first_part_email, k=length))
+        random_email_string = ''.join(random.choices
+                                      (first_part_email, k=length))
         result_email = random_email_string + "@test.ru"
         return result_email
 
@@ -41,6 +44,7 @@ def generate_invalid_data(field: str, length: int) -> str:
             return random_first_symbol
 
         username_string = string.ascii_letters + string.digits + '-_.' * 4
-        random_username_string = ''.join(random.choices(username_string, k=length))
+        random_username_string = ''.join(random.choices
+                                         (username_string, k=length))
         result_username = random_first_symbol + random_username_string
         return result_username
