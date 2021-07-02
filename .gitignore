@@ -1,5 +1,6 @@
 # Allure json reports
 tests/tests_api/allure_reports/*.json
+.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
