@@ -2,7 +2,7 @@ import allure
 import pytest
 from pytest_schema import schema
 from .constants import TodoUrls
-from .data.description_valid_date import testdata
+from .data.description_valid import testdata
 from .data.messages import AuthErrors
 from .data import todo_schema
 
