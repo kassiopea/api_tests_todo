@@ -7,4 +7,4 @@ install:
   - pip install flake8
 
 script:
-  - flake8 todo_list_api
+  - flake8 tests/tests_api/
