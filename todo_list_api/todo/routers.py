@@ -9,8 +9,7 @@ from todo_list_api.todo.todo import (
     update_project,
     delete_project,
     update_todo,
-    delete_todo,
-    del_todo_date
+    delete_todo
 )
 
 todo = Blueprint('todo', __name__)
@@ -53,8 +52,6 @@ def todo_list():
         return get_todo_list(user_id, request)
 
 
-# without crud marks in todo and del date
-# переписать, есть варианты, когда нет id проекта, потому что туду вне проектов
 @todo.route('todo/<todo_id>', methods=['PUT', 'DELETE'])
 @jwt_required
 def todo_edit_or_delete(todo_id):
@@ -65,12 +62,3 @@ def todo_edit_or_delete(todo_id):
 
     if request.method == 'DELETE':
         return delete_todo(user_id, todo_id)
-
-
-# переписать, есть варианты, когда нет id проекта, потому что туду вне проектов
-@todo.route('todo/<project_id>/<todo_id>/date', methods=['DELETE'])
-@jwt_required
-def delete_todo_date(project_id, todo_id):
-    if request.method == 'DELETE':
-        user_id = get_jwt_identity()
-        return del_todo_date(user_id, project_id, todo_id)
