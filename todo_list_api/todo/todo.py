@@ -223,16 +223,3 @@ def delete_todo(user_id, todo_id):
     }]
     response = jsonify(data=result)
     return response
-
-
-def del_todo_date(user_id, project_id, todo_id):
-    todo_collection = mongo.db.projects
-
-    del_date = todo_collection.update(
-        {'_id': ObjectId(project_id),
-         'author_id': ObjectId(user_id),
-         'todo_list_api.todo_id': ObjectId(todo_id)
-         },
-        {'$unset': {'todo_list_api.$.date': ""}})
-
-    return del_date
