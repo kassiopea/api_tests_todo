@@ -42,11 +42,6 @@ tests_api
 │   │   generate_todo_data.py
 │   │   messages.py
 │   │   todo_schema.py
-│       
-└───fixtures
-│   │   __init__.py
-│   │   auth.py
-│   │   todo.py
 │   
 └───models
 │   │   __init__.py

@@ -1,5 +1,9 @@
-# Created by .ignore support plugin (hsz.mobi)
+# custom files and directories
 .idea
+tests
+todo_list_api
+
+# Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
