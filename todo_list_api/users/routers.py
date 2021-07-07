@@ -20,25 +20,11 @@ def get_users():
     return get_all_users(current_id)
 
 
-# @users.route('/users', methods=['GET'])
-# def get_users():
-#     all_users = mongo.db.users.find()
-#     response = json_util.dumps(all_users)
-#     return Response(response, mimetype='application/json')
-
-
 @users.route('profile', methods=['GET'])
 @jwt_required
 def user():
     current_id = get_jwt_identity()
     return get_current_user(current_id)
-
-
-# продумать, что нужно передавать в настройках в профиле
-# @users.route('user/settings', method=['GET'])
-# @jwt_required
-# def get_profile_settings():
-#     pass
 
 
 @users.route('user/marks', methods=['GET', 'POST'])

@@ -11,14 +11,3 @@ def is_admin(current_id):
         return True
 
     return False
-
-
-def is_exist_elem(current_id, key, value):
-    users_collection = mongo.db.users
-    result = users_collection.find_one(
-        {'_id': ObjectId(current_id), key: value}
-    )
-    if result:
-        return True
-
-    return False

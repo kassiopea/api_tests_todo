@@ -84,7 +84,6 @@ def make_list_valid_errors(status_code, data=None):
                            'errors': result_data
                        } or {'error': 'Что-то пошло не так'})
     response.status_code = status_code
-    # abort(response)
     return response
 
 
