@@ -1,4 +1,5 @@
-.gitignore
+# custom dir and files
+todo_list_api
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
